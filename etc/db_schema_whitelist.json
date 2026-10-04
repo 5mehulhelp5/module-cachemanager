@@ -1,0 +1,20 @@
+{
+    "panth_cache_warmup_log": {
+        "column": {
+            "log_id": true,
+            "url": true,
+            "page_type": true,
+            "http_status": true,
+            "status": true,
+            "response_time": true,
+            "warmed_at": true
+        },
+        "index": {
+            "PANTH_CACHE_WARMUP_LOG_STATUS": true,
+            "PANTH_CACHE_WARMUP_LOG_WARMED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,26 @@
+Panth Infotech - Proprietary Software License
+
+Copyright (c) 2026 Panth Infotech (https://kishansavaliya.com)
+
+All rights reserved.
+
+This software is the proprietary information of Panth Infotech.
+Use is subject to license terms. Redistribution of this software
+in source or binary forms, with or without modification, is strictly
+prohibited without prior written permission from Panth Infotech.
+
+You may not:
+  - Copy, modify, or distribute this software.
+  - Reverse-engineer, decompile, or disassemble this software.
+  - Sublicense, rent, or lease this software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+Contact: kishansavaliyakb@gmail.com

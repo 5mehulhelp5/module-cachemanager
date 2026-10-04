@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="panth_cache_warmup_log" resource="default" engine="innodb" comment="Cache Warmup Log">
+        <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="varchar" name="url" nullable="false" length="1024" comment="Page URL"/>
+        <column xsi:type="varchar" name="page_type" nullable="true" length="50" comment="Page Type (home/category/product/cms)"/>
+        <column xsi:type="smallint" name="http_status" unsigned="true" nullable="true" comment="HTTP Response Status"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="20" default="pending" comment="Status (pending/success/failed/skipped)"/>
+        <column xsi:type="decimal" name="response_time" scale="2" precision="8" nullable="true" comment="Response Time (ms)"/>
+        <column xsi:type="timestamp" name="warmed_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Warmed At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="PANTH_CACHE_WARMUP_LOG_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="PANTH_CACHE_WARMUP_LOG_WARMED_AT" indexType="btree">
+            <column name="warmed_at"/>
+        </index>
+    </table>
+</schema>

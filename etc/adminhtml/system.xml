@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system.xsd">
+    <system>
+        <section id="panth_cachemanager" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Cache Manager</label>
+            <tab>panth</tab>
+            <resource>Panth_CacheManager::config</resource>
+
+            <!-- General Settings -->
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cache Manager</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable smart cache invalidation and warmup features</comment>
+                    <backend_model>Panth\CacheManager\Model\Config\Backend\Enabled</backend_model>
+                </field>
+            </group>
+
+            <!-- Cache Warmup -->
+            <group id="warmup" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cache Warmup</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cache Warmup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Automatically warm up cache pages on a cron schedule</comment>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="warmup_schedule" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Warmup Schedule (Cron)</label>
+                    <comment>Cron expression for scheduled warmup (default: every 6 hours). Example: 0 2 * * * for daily at 2am</comment>
+                    <backend_model>Panth\CacheManager\Model\Config\Backend\CronExpression</backend_model>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="warmup_pages" translate="label comment" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pages to Warm Up</label>
+                    <source_model>Panth\CacheManager\Model\Config\Source\WarmupPages</source_model>
+                    <comment>Select which page types to warm up</comment>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="concurrent_requests" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Concurrent Requests</label>
+                    <comment>Number of concurrent warmup requests using curl_multi, from 1 to 50 (default: 5)</comment>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-1-50</validate>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="redirect_status" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log Redirect Responses As</label>
+                    <source_model>Panth\CacheManager\Model\Config\Source\RedirectStatus</source_model>
+                    <comment>Status recorded for a warmup URL that answers with a 3xx redirect. Redirects are not followed, so the target page is not warmed. Default: Success.</comment>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="log_retention_days" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Warmup Log Retention (days)</label>
+                    <comment>Warmup log rows older than this many days are deleted at the start of each warmup run. 0 keeps all rows. Default: 30.</comment>
+                    <validate>validate-digits</validate>
+                </field>
+            </group>
+
+            <!-- Cache Invalidation -->
+            <group id="invalidation" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cache Invalidation</label>
+                <field id="smart_invalidation" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Smart Invalidation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Selectively invalidate cache entries when products, categories, or CMS pages are saved</comment>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="invalidate_on_product_save" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invalidate on Product Save</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Clear product-related cache when a product is saved</comment>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                        <field id="smart_invalidation">1</field>
+                    </depends>
+                </field>
+                <field id="invalidate_on_category_save" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invalidate on Category Save</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Clear category-related cache when a category is saved</comment>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                        <field id="smart_invalidation">1</field>
+                    </depends>
+                </field>
+                <field id="invalidate_on_cms_save" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invalidate on CMS Save</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Clear CMS-related cache when a CMS page or block is saved</comment>
+                    <depends>
+                        <field id="panth_cachemanager/general/enabled">1</field>
+                        <field id="smart_invalidation">1</field>
+                    </depends>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="panth_cachemanager_warmup" instance="Panth\CacheManager\Cron\WarmupCache" method="execute">
+            <schedule>0 */6 * * *</schedule>
+            <config_path>panth_cachemanager/warmup/warmup_schedule</config_path>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <panth_cachemanager>
+            <general>
+                <enabled>0</enabled>
+            </general>
+            <full_page>
+                <ttl>86400</ttl>
+            </full_page>
+            <warmup>
+                <enabled>0</enabled>
+                <warmup_pages>home,catalog_category,catalog_product,cms</warmup_pages>
+                <warmup_schedule>0 */6 * * *</warmup_schedule>
+                <concurrent_requests>5</concurrent_requests>
+                <redirect_status>success</redirect_status>
+                <log_retention_days>30</log_retention_days>
+            </warmup>
+            <invalidation>
+                <smart_invalidation>1</smart_invalidation>
+                <invalidate_on_product_save>1</invalidate_on_product_save>
+                <invalidate_on_category_save>1</invalidate_on_category_save>
+                <invalidate_on_cms_save>1</invalidate_on_cms_save>
+            </invalidation>
+        </panth_cachemanager>
+    </default>
+</config>

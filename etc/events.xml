@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_save_after">
+        <observer name="panth_cache_manager_invalidate_product" instance="Panth\CacheManager\Observer\CacheInvalidate"/>
+    </event>
+    <event name="catalog_category_save_after">
+        <observer name="panth_cache_manager_invalidate_category" instance="Panth\CacheManager\Observer\CacheInvalidate"/>
+    </event>
+    <event name="cms_page_save_after">
+        <observer name="panth_cache_manager_invalidate_page" instance="Panth\CacheManager\Observer\CacheInvalidate"/>
+    </event>
+    <event name="cms_block_save_after">
+        <observer name="panth_cache_manager_invalidate_block" instance="Panth\CacheManager\Observer\CacheInvalidate"/>
+    </event>
+</config>
